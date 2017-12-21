@@ -8,7 +8,7 @@ project than the ones normally available as samples.
 Branch: [kotlin-internal](https://github.com/thalescm/buck-issues/tree/kotlin-internal)
 
 ## You cannot have shared resources between androidTests and tests folder
-Branch: < still coming>
+Branch: [shared-test](https://github.com/thalescm/buck-issues/tree/shared-test)
 
 ## You cannot build instrumentation apk for android libraries
 Branch: [instrumented-apk-lib](https://github.com/thalescm/buck-issues/tree/instrumented-apk-lib)
