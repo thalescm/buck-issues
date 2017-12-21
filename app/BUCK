@@ -1,6 +1,6 @@
 android_resource(
     name = 'res_debug',
-    package = 'machado.thales.buckunittestwithwithkotlininternals',
+    package = 'machado.thales.app',
     res = res_glob([
         ('src/main/res', '**'),
     ]),
@@ -24,9 +24,9 @@ android_resource(
 
 android_build_config(
     name = 'build_config_debug',
-    package = 'machado.thales.buckunittestwithwithkotlininternals',
+    package = 'machado.thales.app',
     values = [
-        'String APPLICATION_ID = "machado.thales.buckunittestwithwithkotlininternals"',
+        'String APPLICATION_ID = "machado.thales.app"',
         'String BUILD_TYPE = "debug"',
         'String FLAVOR = ""',
         'int VERSION_CODE = 1',
@@ -58,7 +58,7 @@ android_library(
     extra_kotlinc_arguments = [
         '-Xplugin=.okbuck/cache/kotlin_home/libexec/lib/kotlin-android-extensions.jar',
         '-P',
-        'plugin:org.jetbrains.kotlin.android:variant=main;app/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.buckunittestwithwithkotlininternals',
+        'plugin:org.jetbrains.kotlin.android:variant=main;app/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.app',
     ],
 
     deps = [
@@ -74,6 +74,7 @@ android_library(
         '//.okbuck/cache:com.android.support.support-media-compat-25.4.0.aar',
         '//.okbuck/cache:com.android.support.support-v4-25.4.0.aar',
         '//.okbuck/cache:com.android.support.support-vector-drawable-25.4.0.aar',
+        '//.okbuck/cache:javax.annotation.javax.annotation-api-1.2.jar',
         '//.okbuck/cache:org.jetbrains.annotations-13.0.jar',
         '//.okbuck/cache:org.jetbrains.kotlin.kotlin-stdlib-1.2.0.jar',
         '//.okbuck/cache:org.jetbrains.kotlin.kotlin-stdlib-jre7-1.2.0.jar',
@@ -90,11 +91,17 @@ lib_deps = []
 robolectric_test(
     name = 'test_debug',
     srcs = glob([
+        'src/sharedTest/java/**/*.java',
+        'src/sharedTest/java/**/*.kt',
         'src/test/java/**/*.java',
         'src/test/java/**/*.kt',
     ]),
     source = '7',
     target = '7',
+    resources = glob([
+        'src/test/resources/**',
+        'src/sharedTest/resources/**',
+    ]),
     provided_deps = [
         '//.okbuck/cache/d8:rt-stub.jar',
     ],
@@ -113,7 +120,7 @@ robolectric_test(
     extra_kotlinc_arguments = [
         '-Xplugin=.okbuck/cache/kotlin_home/libexec/lib/kotlin-android-extensions.jar',
         '-P',
-        'plugin:org.jetbrains.kotlin.android:variant=main;app/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.buckunittestwithwithkotlininternals',
+        'plugin:org.jetbrains.kotlin.android:variant=main;app/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.app',
     ],
 
     deps = [
@@ -129,11 +136,15 @@ robolectric_test(
         '//.okbuck/cache:com.android.support.support-media-compat-25.4.0.aar',
         '//.okbuck/cache:com.android.support.support-v4-25.4.0.aar',
         '//.okbuck/cache:com.android.support.support-vector-drawable-25.4.0.aar',
+        '//.okbuck/cache:com.google.code.gson.gson-2.8.2.jar',
+        '//.okbuck/cache:javax.annotation.javax.annotation-api-1.2.jar',
         '//.okbuck/cache:junit.junit-4.12.jar',
         '//.okbuck/cache:org.hamcrest.hamcrest-core-1.3.jar',
         '//.okbuck/cache:org.jetbrains.annotations-13.0.jar',
         '//.okbuck/cache:org.jetbrains.kotlin.kotlin-stdlib-1.2.0.jar',
         '//.okbuck/cache:org.jetbrains.kotlin.kotlin-stdlib-jre7-1.2.0.jar',
+        '//.okbuck/cache:org.jetbrains.kotlin.kotlin-test-1.2.0.jar',
+        '//.okbuck/cache:org.jetbrains.kotlin.kotlin-test-junit-1.2.0.jar',
         ':build_config_debug',
         ':res_debug',
         ':src_debug',
@@ -171,15 +182,18 @@ okbuck_lint(
 
 android_binary(
     name = 'bin_debug',
-    manifest_skeleton = '//.okbuck/gen/app/debug:AndroidManifest.xml',
+    manifest = '//.okbuck/gen/app/debug:AndroidManifest.xml',
     keystore = '//.okbuck/gen/app/debug:app.keystore',
     dex_tool = 'd8',
     package_type = 'debug',
     manifest_entries = {
         'placeholders': {
-            'applicationId': 'machado.thales.buckunittestwithwithkotlininternals',
+            'applicationId': 'machado.thales.app',
         },
     },
+    tests = [
+        ':instrumentation_debug_test',
+    ],
     deps = [
         ':res_debug',
         ':src_debug',
@@ -190,8 +204,132 @@ android_binary(
 )
 
 android_resource(
+    name = 'res_debug_test',
+    package = 'machado.thales.app.test',
+    resource_union = True,
+    deps = [
+        '//.okbuck/cache:com.android.support.animated-vector-drawable-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.appcompat-v7-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.constraint.constraint-layout-1.0.2.aar',
+        '//.okbuck/cache:com.android.support.support-compat-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.support-core-ui-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.support-core-utils-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.support-fragment-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.support-media-compat-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.support-v4-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.support-vector-drawable-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.test.espresso.espresso-core-3.0.1.aar',
+        '//.okbuck/cache:com.android.support.test.espresso.espresso-idling-resource-3.0.1.aar',
+        '//.okbuck/cache:com.android.support.test.rules-1.0.1.aar',
+        '//.okbuck/cache:com.android.support.test.runner-1.0.1.aar',
+    ],
+    visibility = [
+        'PUBLIC',
+    ],
+)
+
+android_build_config(
+    name = 'build_config_debug_test',
+    package = 'machado.thales.app.test',
+    values = [
+        'String APPLICATION_ID = "machado.thales.app.test"',
+        'String BUILD_TYPE = "debug"',
+        'String FLAVOR = ""',
+        'int VERSION_CODE = 1',
+        'String VERSION_NAME = "1.0"',
+    ],
+    visibility = [
+        'PUBLIC',
+    ],
+)
+
+lib_deps = []
+
+android_library(
+    name = 'src_debug_test',
+    srcs = glob([
+        'src/androidTest/java/**/*.java',
+        'src/androidTest/java/**/*.kt',
+        'src/sharedTest/java/**/*.java',
+        'src/sharedTest/java/**/*.kt',
+    ]),
+    source = '7',
+    target = '7',
+    provided_deps = [
+        '//.okbuck/cache/d8:rt-stub.jar',
+    ],
+    manifest = '//.okbuck/gen/app/debug_test:AndroidManifest.xml',
+    language = 'kotlin',
+    extra_kotlinc_arguments = [
+        '-Xplugin=.okbuck/cache/kotlin_home/libexec/lib/kotlin-android-extensions.jar',
+        '-P',
+        'plugin:org.jetbrains.kotlin.android:package=machado.thales.app.test',
+    ],
+
+    deps = [
+        '//.okbuck/cache:com.android.support.animated-vector-drawable-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.appcompat-v7-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.constraint.constraint-layout-1.0.2.aar',
+        '//.okbuck/cache:com.android.support.constraint.constraint-layout-solver-1.0.2.jar',
+        '//.okbuck/cache:com.android.support.support-annotations-25.4.0.jar',
+        '//.okbuck/cache:com.android.support.support-compat-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.support-core-ui-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.support-core-utils-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.support-fragment-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.support-media-compat-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.support-v4-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.support-vector-drawable-25.4.0.aar',
+        '//.okbuck/cache:com.android.support.test.espresso.espresso-core-3.0.1.aar',
+        '//.okbuck/cache:com.android.support.test.espresso.espresso-idling-resource-3.0.1.aar',
+        '//.okbuck/cache:com.android.support.test.rules-1.0.1.aar',
+        '//.okbuck/cache:com.android.support.test.runner-1.0.1.aar',
+        '//.okbuck/cache:com.google.code.findbugs.jsr305-2.0.1.jar',
+        '//.okbuck/cache:com.google.code.gson.gson-2.8.2.jar',
+        '//.okbuck/cache:com.squareup.javawriter-2.1.1.jar',
+        '//.okbuck/cache:javax.annotation.javax.annotation-api-1.2.jar',
+        '//.okbuck/cache:javax.inject.javax.inject-1.jar',
+        '//.okbuck/cache:junit.junit-4.12.jar',
+        '//.okbuck/cache:net.sf.kxml.kxml2-2.3.0.jar',
+        '//.okbuck/cache:org.hamcrest.hamcrest-core-1.3.jar',
+        '//.okbuck/cache:org.hamcrest.hamcrest-integration-1.3.jar',
+        '//.okbuck/cache:org.hamcrest.hamcrest-library-1.3.jar',
+        '//.okbuck/cache:org.jetbrains.annotations-13.0.jar',
+        '//.okbuck/cache:org.jetbrains.kotlin.kotlin-stdlib-1.2.0.jar',
+        '//.okbuck/cache:org.jetbrains.kotlin.kotlin-stdlib-jre7-1.2.0.jar',
+        ':build_config_debug_test',
+        ':res_debug',
+        ':res_debug_test',
+        ':src_debug',
+        ':test_debug',
+    ],
+    visibility = [
+        'PUBLIC',
+    ],
+)
+
+android_instrumentation_apk(
+    name = 'instrumentation_debug_apk',
+    manifest = '//.okbuck/gen/app/debug_test:AndroidManifest.xml',
+    dex_tool = 'd8',
+    apk = ':bin_debug',
+    deps = [
+        ':res_debug_test',
+        ':src_debug_test',
+    ],
+    visibility = [
+        'PUBLIC',
+    ],
+)
+
+android_instrumentation_test(
+    name = 'instrumentation_debug_test',
+    apk = ':instrumentation_debug_apk',
+    labels = ['ui', 'android', 'device', 'espresso', 'instrumentation'],
+)
+
+android_resource(
     name = 'res_release',
-    package = 'machado.thales.buckunittestwithwithkotlininternals',
+    package = 'machado.thales.app',
     res = res_glob([
         ('src/main/res', '**'),
     ]),
@@ -215,9 +353,9 @@ android_resource(
 
 android_build_config(
     name = 'build_config_release',
-    package = 'machado.thales.buckunittestwithwithkotlininternals',
+    package = 'machado.thales.app',
     values = [
-        'String APPLICATION_ID = "machado.thales.buckunittestwithwithkotlininternals"',
+        'String APPLICATION_ID = "machado.thales.app"',
         'String BUILD_TYPE = "release"',
         'String FLAVOR = ""',
         'int VERSION_CODE = 1',
@@ -249,7 +387,7 @@ android_library(
     extra_kotlinc_arguments = [
         '-Xplugin=.okbuck/cache/kotlin_home/libexec/lib/kotlin-android-extensions.jar',
         '-P',
-        'plugin:org.jetbrains.kotlin.android:variant=main;app/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.buckunittestwithwithkotlininternals',
+        'plugin:org.jetbrains.kotlin.android:variant=main;app/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.app',
     ],
 
     deps = [
@@ -265,6 +403,7 @@ android_library(
         '//.okbuck/cache:com.android.support.support-media-compat-25.4.0.aar',
         '//.okbuck/cache:com.android.support.support-v4-25.4.0.aar',
         '//.okbuck/cache:com.android.support.support-vector-drawable-25.4.0.aar',
+        '//.okbuck/cache:javax.annotation.javax.annotation-api-1.2.jar',
         '//.okbuck/cache:org.jetbrains.annotations-13.0.jar',
         '//.okbuck/cache:org.jetbrains.kotlin.kotlin-stdlib-1.2.0.jar',
         '//.okbuck/cache:org.jetbrains.kotlin.kotlin-stdlib-jre7-1.2.0.jar',
@@ -281,6 +420,8 @@ lib_deps = []
 robolectric_test(
     name = 'test_release',
     srcs = glob([
+        'src/sharedTest/java/**/*.java',
+        'src/sharedTest/java/**/*.kt',
         'src/test/java/**/*.java',
         'src/test/java/**/*.kt',
     ]),
@@ -304,7 +445,7 @@ robolectric_test(
     extra_kotlinc_arguments = [
         '-Xplugin=.okbuck/cache/kotlin_home/libexec/lib/kotlin-android-extensions.jar',
         '-P',
-        'plugin:org.jetbrains.kotlin.android:variant=main;app/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.buckunittestwithwithkotlininternals',
+        'plugin:org.jetbrains.kotlin.android:variant=main;app/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.app',
     ],
 
     deps = [
@@ -320,11 +461,15 @@ robolectric_test(
         '//.okbuck/cache:com.android.support.support-media-compat-25.4.0.aar',
         '//.okbuck/cache:com.android.support.support-v4-25.4.0.aar',
         '//.okbuck/cache:com.android.support.support-vector-drawable-25.4.0.aar',
+        '//.okbuck/cache:com.google.code.gson.gson-2.8.2.jar',
+        '//.okbuck/cache:javax.annotation.javax.annotation-api-1.2.jar',
         '//.okbuck/cache:junit.junit-4.12.jar',
         '//.okbuck/cache:org.hamcrest.hamcrest-core-1.3.jar',
         '//.okbuck/cache:org.jetbrains.annotations-13.0.jar',
         '//.okbuck/cache:org.jetbrains.kotlin.kotlin-stdlib-1.2.0.jar',
         '//.okbuck/cache:org.jetbrains.kotlin.kotlin-stdlib-jre7-1.2.0.jar',
+        '//.okbuck/cache:org.jetbrains.kotlin.kotlin-test-1.2.0.jar',
+        '//.okbuck/cache:org.jetbrains.kotlin.kotlin-test-junit-1.2.0.jar',
         ':build_config_release',
         ':res_release',
         ':src_release',
@@ -362,13 +507,13 @@ okbuck_lint(
 
 android_binary(
     name = 'bin_release',
-    manifest_skeleton = '//.okbuck/gen/app/release:AndroidManifest.xml',
+    manifest = '//.okbuck/gen/app/release:AndroidManifest.xml',
     keystore = '//.okbuck/gen/app/release:app.keystore',
     dex_tool = 'd8',
     package_type = 'release',
     manifest_entries = {
         'placeholders': {
-            'applicationId': 'machado.thales.buckunittestwithwithkotlininternals',
+            'applicationId': 'machado.thales.app',
         },
     },
     deps = [
