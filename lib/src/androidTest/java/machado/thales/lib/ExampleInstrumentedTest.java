@@ -1,4 +1,4 @@
-package machado.thales.core;
+package machado.thales.lib;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("machado.thales.core.test", appContext.getPackageName());
+        assertEquals("machado.thales.lib.test", appContext.getPackageName());
     }
 }

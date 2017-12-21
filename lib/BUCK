@@ -1,6 +1,6 @@
 android_resource(
     name = 'res_debug',
-    package = 'machado.thales.core',
+    package = 'machado.thales.lib',
     res = res_glob([
         ('src/main/res', '**'),
     ]),
@@ -23,9 +23,9 @@ android_resource(
 
 android_build_config(
     name = 'build_config_debug',
-    package = 'machado.thales.core',
+    package = 'machado.thales.lib',
     values = [
-        'String APPLICATION_ID = "machado.thales.core"',
+        'String APPLICATION_ID = "machado.thales.lib"',
         'String BUILD_TYPE = "debug"',
         'String FLAVOR = ""',
         'int VERSION_CODE = 1',
@@ -55,11 +55,9 @@ android_library(
     manifest = '//.okbuck/gen/lib/debug:AndroidManifest.xml',
     language = 'kotlin',
     extra_kotlinc_arguments = [
-        '-module-name',
-        'lib_debug',
         '-Xplugin=.okbuck/cache/kotlin_home/libexec/lib/kotlin-android-extensions.jar',
         '-P',
-        'plugin:org.jetbrains.kotlin.android:variant=main;lib/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.core',
+        'plugin:org.jetbrains.kotlin.android:variant=main;lib/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.lib',
     ],
 
     deps = [
@@ -109,11 +107,9 @@ robolectric_test(
     robolectric_runtime_dependency = '.okbuck/cache/robolectric',
     language = 'kotlin',
     extra_kotlinc_arguments = [
-        '-module-name',
-        'lib_debug',
         '-Xplugin=.okbuck/cache/kotlin_home/libexec/lib/kotlin-android-extensions.jar',
         '-P',
-        'plugin:org.jetbrains.kotlin.android:variant=main;lib/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.core',
+        'plugin:org.jetbrains.kotlin.android:variant=main;lib/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.lib',
     ],
 
     deps = [
@@ -170,7 +166,7 @@ okbuck_lint(
 
 android_resource(
     name = 'res_release',
-    package = 'machado.thales.core',
+    package = 'machado.thales.lib',
     res = res_glob([
         ('src/main/res', '**'),
     ]),
@@ -193,9 +189,9 @@ android_resource(
 
 android_build_config(
     name = 'build_config_release',
-    package = 'machado.thales.core',
+    package = 'machado.thales.lib',
     values = [
-        'String APPLICATION_ID = "machado.thales.core"',
+        'String APPLICATION_ID = "machado.thales.lib"',
         'String BUILD_TYPE = "release"',
         'String FLAVOR = ""',
         'int VERSION_CODE = 1',
@@ -225,11 +221,9 @@ android_library(
     manifest = '//.okbuck/gen/lib/release:AndroidManifest.xml',
     language = 'kotlin',
     extra_kotlinc_arguments = [
-        '-module-name',
-        'lib_release',
         '-Xplugin=.okbuck/cache/kotlin_home/libexec/lib/kotlin-android-extensions.jar',
         '-P',
-        'plugin:org.jetbrains.kotlin.android:variant=main;lib/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.core',
+        'plugin:org.jetbrains.kotlin.android:variant=main;lib/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.lib',
     ],
 
     deps = [
@@ -279,11 +273,9 @@ robolectric_test(
     robolectric_runtime_dependency = '.okbuck/cache/robolectric',
     language = 'kotlin',
     extra_kotlinc_arguments = [
-        '-module-name',
-        'lib_release',
         '-Xplugin=.okbuck/cache/kotlin_home/libexec/lib/kotlin-android-extensions.jar',
         '-P',
-        'plugin:org.jetbrains.kotlin.android:variant=main;lib/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.core',
+        'plugin:org.jetbrains.kotlin.android:variant=main;lib/src/main/res,plugin:org.jetbrains.kotlin.android:package=machado.thales.lib',
     ],
 
     deps = [

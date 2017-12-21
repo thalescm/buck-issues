@@ -1,4 +1,4 @@
-package machado.thales.core
+package machado.thales.lib
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
