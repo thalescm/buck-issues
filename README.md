@@ -1,5 +1,7 @@
 # You cannot build instrumentation apk for android libraries
 
+*Current Status* -> Issue reported at [buck](https://github.com/facebook/buck/issues/1692)
+
 Today it's not possible to build a test apk for a library with buck without defining a target
 apk.
 This is possible with gradle, as this example shows:
