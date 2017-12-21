@@ -1,11 +1,12 @@
 # Kotlin `internal` classes not accessible from test code
 
+*Current Status* -> Issue reported at [YouTrack](https://youtrack.jetbrains.com/issue/KT-21910)
+
 Today it's not possible to pass `K2JVMCompilerArguments.friendPaths` to the compiler CLI, which is a
 needed step in order to make main source sets `internal` fields/classes, etc.. visible to test sources.
 (setting only `module-name` when compiling each module (main and test) is not enough, as this project shows)
 
 The purpose in this is to expose and make it easy to reproduce this "bug"
-Issue reported at [YouTrack](https://youtrack.jetbrains.com/issue/KT-21910)
 
 As of now, it's better to have buck installed in order to test this (explained below)
 ## running (buck installed)
