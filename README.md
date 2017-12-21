@@ -11,7 +11,7 @@ Branch: [kotlin-internal](https://github.com/thalescm/buck-issues/tree/kotlin-in
 Branch: < still coming>
 
 ## You cannot build instrumentation apk for android libraries
-Branch: < still coming>
+Branch: [instrumented-apk-lib](https://github.com/thalescm/buck-issues/tree/instrumented-apk-lib)
 
 ### Note 
 
