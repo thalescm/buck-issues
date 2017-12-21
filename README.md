@@ -1,15 +1,20 @@
-# kotlinWithBuckCompilerBug
+# Buck Issues
 
-Today it's not possible to pass `K2JVMCompilerArguments.friendPaths` to the compiler CLI, which is a 
-needed step in order to make main source sets `internal` fields/classes, etc.. visible to test sources. 
-(setting only `module-name` when compiling each module (main and test) is not enough, as this project shows)
+This project contains all issues I'm encountering when trying to setup buck in a more complex
+project than the ones normally available as samples.
 
-The purpose in this is to expose and make it easy to reproduce this "bug"
 
-## running 
-`./gradlew buckWrapper`
-`./buckw build //lib:test_debug` (this make take sometime if buck is not yet set)
+## It's not possible to test kotlin files which reference `internal` classes 
+Branch: [kotlin-internal](https://github.com/thalescm/buck-issues/tree/kotlin-internal)
 
-Note you need to have ndk version 15.2.4203891 or *below*, and the environments variables:    
+## You cannot have shared resources between androidTests and tests folder
+Branch: < still coming>
+
+## You cannot build instrumentation apk for android libraries
+Branch: < still coming>
+
+### Note 
+
+For all projects, you need to have ndk version 15.2.4203891 or *below*, and the environments variables:    
 `ANDROID_NDK`=`$ANDROID_HOME/ndk-bundle`  
 `ANDROID_NDK_REPOSITORY`=`$ANDROID_HOME`
