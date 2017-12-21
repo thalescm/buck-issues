@@ -1,5 +1,7 @@
 # You cannot have shared resources between androidTests and tests folder
 
+*Current Status* -> Issue reported at [buck](https://github.com/facebook/buck/issues/1693)
+
 I'm not able to share resources with `test` folder and `androidTest` folder.
 it doesn't find `thales.json` for unit tests, when that resource is under `sharedTest/resources/` folder.
 kt classes under `sharedTest/java` folder are normally found.
